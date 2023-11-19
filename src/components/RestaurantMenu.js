@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; 
 import {MenuShimmer} from "./Shimmer";
-import {MENU_API, IMG_CDN_URL, ITEM_IMG_CDN_URL, MENU_ITEM_TYPE_KEY, RESTAURANT_TYPE_KEY} from "../constants";
+import {MENU_API, ITEM_IMG_CDN_URL, MENU_ITEM_TYPE_KEY, RESTAURANT_TYPE_KEY} from "../constants";
 
 const RestaurantMenu = () => {
   const { resId } = useParams(); // find resId from url using useParams hook
@@ -43,7 +43,7 @@ const RestaurantMenu = () => {
   return !restaurant ? (
     <MenuShimmer />
   ) : (
-    <div className="px-44">
+    <div className="px-2 md:px-44">
       <div className="border-b py-4" >
         {/* <img
           className=""
@@ -75,8 +75,8 @@ const RestaurantMenu = () => {
           <div className="">
             <h3 className="text-[15px] font-bold text-yellow-500 pt-4">⭐ Bestseller</h3>
             {menuItems.map((item) => (
-              <div className="flex justify-between border-b border-gray-300 mb-6" key={item?.id}>
-                <div className="w-[75%]">
+              <div className="flex justify-between border-b border-gray-300 mb-6 items-center" key={item?.id}>
+                <div className="w-[60%] md:w-[75%]">
                   <h3 className="text-md font-bold text-gray-800">{item?.name}</h3>
                   <p className="text-[15px] font-semibold text-gray-600">
                     {item?.price > 0
@@ -89,10 +89,10 @@ const RestaurantMenu = () => {
                   </p>
                   <p className="py-3 text-gray-400 text-sm">{item?.description}</p>
                 </div>
-                <div className="m-auto text-center">
+                <div className="m-auto text-center py-4">
                   {item?.imageId && (
                     <img
-                      className="w-40 h-32 rounded-2xl"
+                      className="w-36 h-24 rounded-2xl"
                       src={ITEM_IMG_CDN_URL + item?.imageId}
                       alt={item?.name}
                     />

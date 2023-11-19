@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FoodCard from './FoodCard';
+import Shimmer from "./Shimmer"; 
 
 const Food = () => {
 
@@ -22,17 +23,21 @@ const Food = () => {
   }
 
   return (
-    <div className=''>
+    <div className='py-8'>
           {/* <div className='text-center text-4xl font-semibold py-6'>
             <h1 className='text-red-500 border-b-4 border-red-500 w-fit m-auto py-2'>Food App</h1>
           </div> */}
-          <div className='md:grid md:grid-cols-4 flex flex-wrap m-auto gap-4 px-8'>
+        {foodData?.length === 0 ? (
+         <Shimmer />
+        ) : (
+          <div className='grid grid-cols-2 md:flex md:flex-wrap gap-2 md:gap-4 px-2 sm:px-20 md:px-40 m-auto '>
           {
             foodData.map((data) => (
               <FoodCard key={data.idCategory} data={data} />
             ))
           }
           </div>
+        )}
     </div>
   )
 }

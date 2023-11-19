@@ -1,6 +1,6 @@
 // import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react"; /* This is named export */
-import Shimmer from "./Shimmer"; /* This is default export */
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer"; 
 import { SWIGGY_API } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import {Link} from "react-router-dom";
@@ -82,7 +82,7 @@ const Restaurant = () => {
       <div className="text-center py-6">
         <input
           type="text"
-          className="px-4 py-2 w-[30%] border-b border-t border-l border-black"
+          className="px-4 py-2 w-[55%] sm:w-[40%] md:w-[30%] border-b border-t border-l border-black"
           placeholder="Search a restaurant you want..."
           value={searchText}
           // update the state variable searchText when we typing in input box
@@ -104,7 +104,7 @@ const Restaurant = () => {
       {allRestaurants?.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="flex flex-wrap gap-2 md:gap-4 px-20 md:px-40 m-auto py-4">
+        <div className="md:flex md:flex-wrap grid grid-cols-2 gap-2 md:gap-4 px-2 sm:px-20 md:px-40 m-auto py-4">
           {/* We are mapping restaurants array and passing JSON array data to RestaurantCard component as props with unique key as restaurant.data.id */}
           {filteredRestaurants.map((restaurant) => {
             return (
