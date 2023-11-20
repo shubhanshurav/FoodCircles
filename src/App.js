@@ -12,6 +12,7 @@ import { createBrowserRouter, Outlet } from "react-router-dom"; // for routing o
 import Cocktail from "./components/Cocktail";
 import Restaurant from "./components/Restaurant";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 import { Provider } from "react-redux";
 import { store } from './redux/Store';
 
@@ -63,6 +64,10 @@ export const appRouter = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
       {
         path: "/restaurant/:resId",

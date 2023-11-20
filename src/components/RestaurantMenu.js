@@ -29,13 +29,13 @@ const RestaurantMenu = () => {
       
       // Set menu item data
       const menuItemsData = json?.data?.cards.find(x=> x.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards?.map(x => x.card?.card)?.filter(x=> x['@type'] === MENU_ITEM_TYPE_KEY)?.map(x=> x.itemCards).flat().map(x=> x.card?.info) || [];
-      console.log(menuItemsData);
       
       const uniqueMenuItems = [];
       menuItemsData.forEach((item) => {
         if (!uniqueMenuItems.find(x => x.id === item.id)) {
           uniqueMenuItems.push(item);
         }
+        console.log(item);
       })
       setMenuItems(uniqueMenuItems);
     } catch (error) {
@@ -45,13 +45,13 @@ const RestaurantMenu = () => {
     }
   }
 
-  const addToCart = () => {
-    dispatch(add(restaurant));
+  const addToCart = (item) => {
+    dispatch(add(item));
     toast.success("Item added to Cart");
   }
 
-  const removeFromCart = () => {
-    dispatch(remove(resId));
+  const removeFromCart = (itemId) => {
+    dispatch(remove(itemId));
     toast.error("Item removed from Cart");
   }
 
@@ -114,16 +114,16 @@ const RestaurantMenu = () => {
                   )}
                   <div className="-mt-5">
                     {/* <button className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"> ADD +</button> */}
-                      {cart.some((p) => p.id === resId) ? (
+                      {cart.some((p) => p.id === item.id) ? (
                         <button
-                          onClick={removeFromCart}
+                          onClick={() => removeFromCart(item?.id)}
                           className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
                         >
                           Remove
                         </button>
                       ) : (
                         <button
-                          onClick={addToCart}
+                          onClick={() => addToCart(item)}
                           className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
                           >
                           ADD +
