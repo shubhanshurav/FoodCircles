@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; 
 import {MenuShimmer} from "./Shimmer";
 import {MENU_API, ITEM_IMG_CDN_URL, MENU_ITEM_TYPE_KEY, RESTAURANT_TYPE_KEY} from "../constants";
+import { add, remove} from '../redux/CartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from "react-toastify";
 
 const RestaurantMenu = () => {
   const { resId } = useParams(); // find resId from url using useParams hook
   const [restaurant, setRestaurant] = useState(null); // store the api data in restaurant
   const [menuItems, setMenuItems] = useState([]);
-  console.log(resId);
+  const { cart } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  // console.log(resId);
 
   useEffect(() => {
     getRestaurantInfo(); 
@@ -21,10 +26,10 @@ const RestaurantMenu = () => {
       // Set restaurant data
       const restaurantData = json?.data?.cards?.map(x => x.card)?.find(x => x && x.card['@type'] === RESTAURANT_TYPE_KEY)?.card?.info || null;
       setRestaurant(restaurantData);
-      console.log(restaurantData);
-
+      
       // Set menu item data
       const menuItemsData = json?.data?.cards.find(x=> x.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards?.map(x => x.card?.card)?.filter(x=> x['@type'] === MENU_ITEM_TYPE_KEY)?.map(x=> x.itemCards).flat().map(x=> x.card?.info) || [];
+      console.log(menuItemsData);
       
       const uniqueMenuItems = [];
       menuItemsData.forEach((item) => {
@@ -38,6 +43,16 @@ const RestaurantMenu = () => {
       setRestaurant(null);
       console.log(error);
     }
+  }
+
+  const addToCart = () => {
+    dispatch(add(restaurant));
+    toast.success("Item added to Cart");
+  }
+
+  const removeFromCart = () => {
+    dispatch(remove(resId));
+    toast.error("Item removed from Cart");
   }
 
   return !restaurant ? (
@@ -98,7 +113,22 @@ const RestaurantMenu = () => {
                     />
                   )}
                   <div className="-mt-5">
-                    <button className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"> ADD +</button>
+                    {/* <button className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"> ADD +</button> */}
+                      {cart.some((p) => p.id === resId) ? (
+                        <button
+                          onClick={removeFromCart}
+                          className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
+                        >
+                          Remove
+                        </button>
+                      ) : (
+                        <button
+                          onClick={addToCart}
+                          className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
+                          >
+                          ADD +
+                        </button>
+                      )}
                   </div>
                 </div>
               </div>

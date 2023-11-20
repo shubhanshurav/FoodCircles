@@ -82,14 +82,14 @@ const Restaurant = () => {
       <div className="text-center py-6">
         <input
           type="text"
-          className="px-4 py-2 w-[55%] sm:w-[40%] md:w-[30%] border-b border-t border-l border-black"
+          className="px-4 py-2 w-[55%] sm:w-[40%] md:w-[33%] border-b border-t border-l border-black"
           placeholder="Search a restaurant you want..."
           value={searchText}
           // update the state variable searchText when we typing in input box
           onChange={(e) => setSearchText(e.target.value)}
         ></input>
         <button
-          className="px-6 py-2 bg-gray-600 border-b border-t border-r border-black text-white font-semibold hover:bg-gray-500"
+          className="px-10 py-2 bg-gray-600 border-b border-t border-r border-black text-white font-semibold hover:bg-gray-500"
           onClick={() => {
             // user click on button searchData function is called
             searchData(searchText, allRestaurants);

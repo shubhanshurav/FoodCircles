@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {LOGO} from "../constants";
 
@@ -18,6 +19,7 @@ const Title = () => (
 const Header = () => {
   // use useState for user logged in or logged out
   const [isLoggedin, setIsLoggedin] = useState(true);
+  const { cart } = useSelector((state) => state);
 
   return (
     <div className="flex justify-between items-center py-2 border shadow-lg  sticky top-0 bg-white z-10">
@@ -29,9 +31,13 @@ const Header = () => {
           <Link to="/cocktail"> <li>Cocktail</li></Link>
           <Link to="/about" className="hidden md:block"><li>About</li></Link>
           <Link to="/contact" className="hidden md:block"><li>Contact</li></Link>
-          <li>
-            <i className="text-lg">🛒</i>
-          </li>
+          <Link to="/cart">
+            <p className="text-lg">🛒</p>
+            {
+              cart.length > 0 && 
+              <span className="absolute top-3 ml-4 font-bold text-gray-800 text-xs bg-yellow-500 flex w-4 h-4 items-center justify-center animate-bounce rounded-full">{cart.length}</span>
+            }
+          </Link>
           <li>
             {/* use conditional rendering for login and logout */}
             {isLoggedin ? (

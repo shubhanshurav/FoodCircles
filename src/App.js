@@ -11,14 +11,19 @@ import Profile from "./components/Profile";
 import { createBrowserRouter, Outlet } from "react-router-dom"; // for routing our page import createBrowserRouter and RouterProvider for providing router & Outlet for children component for nested routing
 import Cocktail from "./components/Cocktail";
 import Restaurant from "./components/Restaurant";
+import Cart from "./components/Cart";
+import { Provider } from "react-redux";
+import { store } from './redux/Store';
 
 // AppLayout component to render: Header, Outlet(it contain children component like body, About, Restaurant Menu etc) and Footer Component
 const AppLayout = () => {
   return (
     <React.Fragment>
-      <Header />
-      <Outlet />
-      <Footer />
+      <Provider store={store}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </Provider>
     </React.Fragment>
   );
 };
@@ -54,6 +59,10 @@ export const appRouter = createBrowserRouter([
       {
         path: "food",
         element: <Food />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
       {
         path: "/restaurant/:resId",
