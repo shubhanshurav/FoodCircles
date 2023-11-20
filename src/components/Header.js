@@ -35,7 +35,7 @@ const Header = () => {
             <p className="text-lg">🛒</p>
             {
               cart.length > 0 && 
-              <span className="absolute top-3 ml-4 font-bold text-gray-800 text-xs bg-yellow-500 flex w-4 h-4 items-center justify-center animate-bounce rounded-full">{cart.length}</span>
+              <span className="absolute top-4 md:top-7 ml-4 font-bold text-gray-800 text-xs bg-yellow-500 flex w-4 h-4 items-center justify-center animate-bounce rounded-full">{cart.length}</span>
             }
           </Link>
           <li>

@@ -33,9 +33,9 @@ const Cart = () => {
                       <p className="font-bold text-2xl text-gray-600">Total Items :<span className="text-blue-700 px-2">{cart.length}</span></p>
                       <p className="font-bold text-2xl text-gray-600">Total Amount : <span className="text-blue-700">₹{totalAmount}</span></p>
                     </div>
-                    <div className="py-2 md:py-12 text-center">
+                    <div className="py-2 md:py-10 text-center">
                       <Link to="/checkout">
-                        <button className='bg-blue-700 border-2 border-blue-700 rounded-2xl font-semibold text-sm text-white w-[30%] p-2 mt-5 hover:bg-blue-800'>
+                        <button className='bg-blue-700 border-2 border-blue-700 rounded-2xl font-semibold text-sm text-white w-[65%] md:w-[25%] p-2 mt-5 hover:bg-blue-800'>
                           Pay Now
                         </button>
                       </Link>

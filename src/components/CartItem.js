@@ -14,7 +14,7 @@ const CartItem = ({ item , index}) => {
     }
 
   return (
-    <div>
+    <div className="px-2 md:px-44">
       <div
         className="flex justify-between border-b border-gray-300 mb-6 items-center"
         key={item?.id}
