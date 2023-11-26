@@ -12,16 +12,16 @@ const Contact = () => {
       <div className="w-full">
       <img src= "./assets/shubhanshuimg.jpg" alt="Contact us" />
       </div>
-      <div className="w-full">
-         <h1 className="font-extrabold text-4xl pb-5 text-center">Contact us</h1>
-            <form onSubmit={handleSubmit} className="flex flex-col border px-6 py-4 shadow-lg">
+      <div className="w-full border shadow-lg py-6">
+         <h1 className="font-extrabold text-4xl pb-5 text-center text-yellow-500">Contact us</h1>
+            <form onSubmit={handleSubmit} className="flex flex-col px-6 py-4">
               <span className="py-5">
                 <label className="text-xl px-1 font-semibold">Name </label>
-                <input type="text" placeholder="Name" className="border px-4 py-1 border-gray-400" required/>
+                <input type="text" placeholder="Name" className="border px-4 py-1 border-gray-300" required/>
               </span>
               <span className="py-5">
-                <label className="text-xl px-1 font-semibold">Email Id </label>
-                <input type="email" placeholder="Email"  className="border px-4 py-1 border-gray-400" required/>
+                <label className="text-xl px-1 font-semibold">Email id </label>
+                <input type="email" placeholder="Email"  className="border px-4 py-1 border-gray-300" required/>
               </span>
               <div className="flex flex-col pb-4">
                 <label className="text-xl px-1 font-semibold py-1">Message </label>
