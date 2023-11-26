@@ -8,11 +8,11 @@ const Contact = () => {
         setMessage(true);
     }
   return (
-    <div className="flex px-4 py-4">
-      <div className="w-full">
-      <img src= "./assets/shubhanshuimg.jpg" alt="Contact us" />
+    <div className="flex flex-col md:flex-row px-4 py-8 gap-4 shadow-lg border m-8">
+      <div className="w-fit md:w-full py-6 px-6">
+        <img src= "./assets/contact-us.png" alt="Contact us" />
       </div>
-      <div className="w-full border shadow-lg py-6">
+      <div className="w-fit md:w-full py-6">
          <h1 className="font-extrabold text-4xl pb-5 text-center text-yellow-500">Contact us</h1>
             <form onSubmit={handleSubmit} className="flex flex-col px-6 py-4">
               <span className="py-5">
