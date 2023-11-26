@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./components/Header";
-import Food from "./components/Food";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Error from "./components/Error";
@@ -9,7 +8,6 @@ import Login from "./components/Login";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
 import { createBrowserRouter, Outlet } from "react-router-dom"; // for routing our page import createBrowserRouter and RouterProvider for providing router & Outlet for children component for nested routing
-import Cocktail from "./components/Cocktail";
 import Restaurant from "./components/Restaurant";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
@@ -52,14 +50,6 @@ export const appRouter = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
-      },
-      {
-        path: "cocktail",
-        element: <Cocktail />,
-      },
-      {
-        path: "food",
-        element: <Food />,
       },
       {
         path: "cart",

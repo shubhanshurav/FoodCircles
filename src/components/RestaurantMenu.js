@@ -16,7 +16,7 @@ const RestaurantMenu = () => {
 
   useEffect(() => {
     getRestaurantInfo(); 
-  }, []);
+  },[]);
 
   async function getRestaurantInfo() {
     try {

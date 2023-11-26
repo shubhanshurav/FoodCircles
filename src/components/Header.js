@@ -27,10 +27,10 @@ const Header = () => {
       <div className="">
         <ul className="flex gap-2 md:gap-3 px-4 items-center text-sm md:text-md font-semibold text-gray-700">
           <Link to="/"><li>Home</li></Link>
-          <Link to="/food"> <li>Food</li></Link>
-          <Link to="/cocktail"> <li>Cocktail</li></Link>
+          {/* <Link to="/food"> <li>Food</li></Link> */}
+          {/* <Link to="/cocktail"> <li>Cocktail</li></Link> */}
           <Link to="/about" ><li>About</li></Link>
-          <Link to="/contact" className="hidden md:block"><li>Contact</li></Link>
+          <Link to="/contact"><li>Contact</li></Link>
           <Link to="/cart">
             <p className="text-lg">🛒</p>
             {
