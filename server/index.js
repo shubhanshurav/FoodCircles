@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000", // Replace with your frontend origin
+    origin: "*", 
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   })
