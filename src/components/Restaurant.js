@@ -5,7 +5,7 @@ import Shimmer from "./Shimmer";
 import RestaurantCard from "./RestaurantCard";
 import {Link} from "react-router-dom";
 
-const SWIGGY_API = process.env.REACT_APP_SWIGGY_API;
+const SWIGGY_API = process.env.REACT_APP_SWIGGY_API; 
 console.log("SWIGGY_API", SWIGGY_API); 
 
 // Filter the restaurant data according input type
