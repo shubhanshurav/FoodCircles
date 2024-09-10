@@ -30,7 +30,7 @@ const Restaurant = () => {
   }, []);
 
   // async function getRestaurant to fetch Swiggy API data
-  async function getRestaurants() {
+  async function getRestaurants() { 
     // handle the error using try... catch
     try {
       const response = await fetch(SWIGGY_API);
