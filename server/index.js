@@ -12,7 +12,7 @@ app.use(
     origin: "*" || "https://shubhanshu-foodcircles.vercel.app/",
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
-  })
+  }) 
 );
 
 // Endpoint to fetch Swiggy data
