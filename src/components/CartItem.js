@@ -1,8 +1,11 @@
 import React from "react";
-import {ITEM_IMG_CDN_URL} from "../constants";
+// import {ITEM_IMG_CDN_URL} from "../constants";
 import { remove } from '../redux/CartSlice';
 import { useDispatch } from 'react-redux';
 import { toast } from "react-toastify";
+
+const ITEM_IMG_CDN_URL = process.env.REACT_APP_ITEM_IMG_CDN_URL;
+
 
 const CartItem = ({ item , index}) => {
 

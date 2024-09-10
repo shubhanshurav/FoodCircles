@@ -1,5 +1,7 @@
 import React from 'react';
-import { IMG_CDN_URL } from '../constants';
+// import { IMG_CDN_URL } from '../constants';
+
+const IMG_CDN_URL = process.env.REACT_APP_IMG_CDN_URL;
 
 const RestaurantCard = ({
   cloudinaryImageId,

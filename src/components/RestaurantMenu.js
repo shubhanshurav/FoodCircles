@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; 
 import {MenuShimmer} from "./Shimmer";
-import {MENU_API, ITEM_IMG_CDN_URL, MENU_ITEM_TYPE_KEY, RESTAURANT_TYPE_KEY, IMG_CDN_URL} from "../constants";
+// import {MENU_API, ITEM_IMG_CDN_URL, MENU_ITEM_TYPE_KEY, RESTAURANT_TYPE_KEY, IMG_CDN_URL} from "../constants";
 import { add, remove} from '../redux/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
+
+const MENU_API = process.env.REACT_APP_MENU_API;
+const IMG_CDN_URL = process.env.REACT_APP_IMG_CDN_URL;
+const ITEM_IMG_CDN_URL = process.env.REACT_APP_ITEM_IMG_CDN_URL;
+const MENU_ITEM_TYPE_KEY = process.env.REACT_APP_MENU_ITEM_TYPE_KEY;
+const RESTAURANT_TYPE_KEY = process.env.REACT_APP_RESTAURANT_TYPE_KEY;
+
 
 const RestaurantMenu = () => {
   const { resId } = useParams(); // find resId from url using useParams hook
