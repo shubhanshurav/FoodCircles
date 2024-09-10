@@ -22,7 +22,7 @@ const RestaurantMenu = () => {
     try {
       const response = await fetch(MENU_API + resId);
       const json = await response.json();
-      // console.log("menu", json);
+      console.log("menu", response);
       
       // Set restaurant data
       const restaurantData = json?.data?.cards?.map(x => x.card)?.find(x => x && x.card['@type'] === RESTAURANT_TYPE_KEY)?.card?.info || null;
