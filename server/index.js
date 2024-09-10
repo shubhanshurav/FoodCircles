@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
-app.use(
+app.use( 
   cors({
     origin: "*" || "https://shubhanshu-foodcircles.vercel.app/",
     methods: ["GET", "POST"],
