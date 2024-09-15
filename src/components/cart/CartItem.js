@@ -1,20 +1,18 @@
 import React from "react";
 // import {ITEM_IMG_CDN_URL} from "../constants";
-import { remove } from '../redux/CartSlice';
-import { useDispatch } from 'react-redux';
+import { remove } from "../../redux/slices/CartSlice";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 const ITEM_IMG_CDN_URL = process.env.REACT_APP_ITEM_IMG_CDN_URL;
 
+const CartItem = ({ item, index }) => {
+  const dispatch = useDispatch();
 
-const CartItem = ({ item , index}) => {
-
-   const dispatch = useDispatch();
-
-    const removeFromCart = (itemId) => {
-        dispatch(remove(itemId));
-        toast.error("Item removed from Cart");
-    }
+  const removeFromCart = (itemId) => {
+    dispatch(remove(itemId));
+    toast.error("Item removed from Cart");
+  };
 
   return (
     <div className="px-2 md:px-44">
@@ -48,12 +46,12 @@ const CartItem = ({ item , index}) => {
           <div className="-mt-5">
             {/* <button className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"> ADD +</button> */}
             {/* {cart.some((p) => p.id === item.id) ? ( */}
-              <button
-                onClick={() => removeFromCart(item?.id)}
-                className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
-              >
-                Remove
-              </button>
+            <button
+              onClick={() => removeFromCart(item?.id)}
+              className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
+            >
+              Remove
+            </button>
             {/* )} */}
           </div>
         </div>

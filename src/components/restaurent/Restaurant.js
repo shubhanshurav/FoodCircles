@@ -1,6 +1,6 @@
 // import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
-import Shimmer from "./Shimmer"; 
+import Shimmer from "../Shimmer"; 
 // import { SWIGGY_API } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import {Link} from "react-router-dom";
@@ -36,7 +36,7 @@ const Restaurant = () => {
       const response = await fetch(SWIGGY_API);
       const json = await response.json();
 
-      console.log("API:", json);
+      // console.log("API:", json);
       
       // initialize checkJsonData() function to check Swiggy Restaurant data
       async function checkJsonData(jsonData) {
@@ -44,7 +44,7 @@ const Restaurant = () => {
 
           // initialize checkData for Swiggy Restaurant data
           let checkData = json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-          console.log("checkData:", checkData);
+          // console.log("checkData:", checkData);
 
           // if checkData is not undefined then return it
           if (checkData !== undefined) {

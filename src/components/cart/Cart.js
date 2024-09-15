@@ -48,7 +48,7 @@ const Cart = () => {
                 <Link to="/">
                     <button 
                     className='bg-yellow-600 border-2 border-yellow-600 rounded-lg text-md text-white py-2 px-2 font-chakra-petch font-extralight hover:bg-yellow-600'>
-                    Shop Now
+                    Order Now
                     </button>
                 </Link>
                 </div>

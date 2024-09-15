@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {LOGO} from "../constants";
+import {LOGO} from "../../constants";
 
 // Title component for display logo
 const Title = () => (
