@@ -41,7 +41,8 @@ const cartSlice = createSlice({
     },
     remove: (state, action) => {
       const restaurantId = action.payload;
-      const index = state.cart.findIndex((item) => item._id === restaurantId);
+      const index = state.cart.findIndex((item) => item._id !== restaurantId);
+      console.log(restaurantId,  index)
 
       if (index >= 0) {
         // If the restaurant is found in the cart, remove it

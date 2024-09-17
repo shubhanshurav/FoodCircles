@@ -15,21 +15,23 @@ const RestaurantMenu = () => {
   const { resId } = useParams(); // find resId from url using useParams hook
   const restaurant = useRestaurant(resId); // store the api data in restaurant
   const menuItems = useRestaurantMenu(resId);
-  const cart = useSelector((state) => state.cart || []); // Fallback to empty array if cart is undefined
+  const cart = useSelector((state) => state.cart.cart || []); // Fallback to empty array if cart is undefined
   const dispatch = useDispatch();
+
+  // console.log(menuItems)
 
   // State to manage the selected item and modal visibility
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const addToCart = (item) => {
-    dispatch(add(item));
-    toast.success("Item added to Cart");
-  };
+const addToCart = (item) => {
+  dispatch(add(item));
+  toast.success("Item added to Cart");
+};
 
-  const removeFromCart = (itemId) => {
-    dispatch(remove(itemId));
-    toast.error("Item removed from Cart");
-  };
+const removeFromCart = (itemId) => {
+  dispatch(remove(itemId));
+  toast.error("Item removed from Cart");
+};
 
   // Function to handle opening the modal
   const openModal = (item) => {

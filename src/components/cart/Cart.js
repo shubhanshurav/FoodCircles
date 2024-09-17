@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
+import { resetCart } from "../../redux/slices/CartSlice";
 
 const Cart = () => {
-  const { cart } = useSelector((state) => state);
-  // console.log(cart);
+  // Safeguard by setting a default empty array if cart is undefined
+  const cart = useSelector((state) => state.cart?.cart || []);
+  const dispatch = useDispatch();
 
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    const cartTotal = cart.reduce(
+    const cartTotal = cart?.reduce(
       (acc, curr) => acc + (Number(curr.price) || 0),
       0
     );
-    const totalRupye = cartTotal / 100;
+    const totalRupee = cartTotal / 100;
 
-    setTotalAmount(totalRupye.toFixed(2));
+    setTotalAmount(totalRupee.toFixed(2));
   }, [cart]);
+
+  const clearCart = (itemId) =>{
+     dispatch(resetCart(itemId))
+  }
 
   return (
     <div>
@@ -26,7 +32,7 @@ const Cart = () => {
           <div>
             <div className="shadow-lg">
               {cart.map((item, index) => (
-                <CartItem key={item.id} item={item} index={index} />
+                <CartItem key={item._id} item={item} index={index} />
               ))}
             </div>
             <div className="shadow-lg pb-8">
@@ -46,6 +52,11 @@ const Cart = () => {
                     Pay Now
                   </button>
                 </Link>
+              </div>
+              <div className="py-2 md:py-10 text-center">
+                  <button onClick={() => clearCart(cart._id)} className="bg-red-700 border-2 border-red-700 rounded-2xl font-bold text-sm text-white w-[65%] md:w-[25%] p-2 mt-5 hover:bg-red-800">
+                    Clear Cart
+                  </button>
               </div>
             </div>
           </div>
