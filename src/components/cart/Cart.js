@@ -21,9 +21,9 @@ const Cart = () => {
     setTotalAmount(totalRupee.toFixed(2));
   }, [cart]);
 
-  const clearCart = (itemId) =>{
-     dispatch(resetCart(itemId))
-  }
+  const clearCart = (itemId) => {
+    dispatch(resetCart(itemId));
+  };
 
   return (
     <div>
@@ -46,17 +46,22 @@ const Cart = () => {
                   <span className="text-yellow-500">₹{totalAmount}</span>
                 </p>
               </div>
-              <div className="py-2 md:py-10 text-center">
-                <Link to="/checkout">
-                  <button className="bg-yellow-500 border-2 border-yellow-500 rounded-2xl font-bold text-sm text-red-800 w-[65%] md:w-[25%] p-2 mt-5 hover:bg-yellow-600">
-                    Pay Now
-                  </button>
-                </Link>
-              </div>
-              <div className="py-2 md:py-10 text-center">
-                  <button onClick={() => clearCart(cart._id)} className="bg-red-700 border-2 border-red-700 rounded-2xl font-bold text-sm text-white w-[65%] md:w-[25%] p-2 mt-5 hover:bg-red-800">
+              <div className="flex flex-col items-center gap-4 text-center w-fit m-auto md:flex-row">
+                <div className="py-2 md:pt-7 text-center">
+                  <Link to="/checkout">
+                    <button className="bg-yellow-500 border-2 border-yellow-500 rounded-xl font-bold text-sm text-red-800 p-2 hover:bg-yellow-600">
+                      Pay Now
+                    </button>
+                  </Link>
+                </div>
+                <div className="py-2 md:pt-7 text-center">
+                  <button
+                    onClick={() => clearCart(cart._id)}
+                    className="bg-red-700 border-2 border-red-700 rounded-xl font-bold text-sm text-white p-2 hover:bg-red-800"
+                  >
                     Clear Cart
                   </button>
+                </div>
               </div>
             </div>
           </div>
