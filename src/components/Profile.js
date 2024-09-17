@@ -28,6 +28,7 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   const { token } = useSelector((state) => state.auth); // Assuming token is stored in auth slice
+  console.log(token)
 
   useEffect(() => {
     if (token) {
@@ -42,6 +43,7 @@ const Profile = () => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
+    // console.log(formData)
     dispatch(updateDisplayPicture(token, formData));
   };
 

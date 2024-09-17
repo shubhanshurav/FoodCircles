@@ -22,7 +22,7 @@ const Title = () => (
 const Header = () => {
   const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.profile);
-  console.log("cart", cart)
+  // console.log("cart", cart)
 
   const navigate = useNavigate();
   // const dispatch = useDispatch();

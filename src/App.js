@@ -29,12 +29,14 @@ const AppLayout = () => {
   const { user } = useSelector((state) => state.profile);
 
   // Use useEffect to restore token on app initialization
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      dispatch(setToken(JSON.parse(token))); // Restore the token to Redux
-    }
-  }, [dispatch]);
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    dispatch(setToken(JSON.parse(token))); // Restore token to Redux
+  }
+}, [dispatch]);
+
+
 
   return (
     <>
