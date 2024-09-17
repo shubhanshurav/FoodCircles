@@ -9,7 +9,7 @@ const Checkout = () => {
                 <Link to="/">
                     <button 
                     className='bg-blue-700 border-2 border-blue-700 rounded-lg text-md text-white py-2 px-2 font-chakra-petch font-extralight hover:bg-blue-800'>
-                    Shop Now
+                    Order Now
                     </button>
                 </Link>
         </div>

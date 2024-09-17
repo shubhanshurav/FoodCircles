@@ -6,7 +6,7 @@ import RestaurantCard from "./RestaurantCard";
 import {Link} from "react-router-dom";
 
 const SWIGGY_API = process.env.REACT_APP_SWIGGY_API; 
-console.log("SWIGGY_API", SWIGGY_API); 
+// console.log("SWIGGY_API", SWIGGY_API); 
 
 // Filter the restaurant data according input type
 function filterData(searchText, restaurants) {
@@ -57,7 +57,7 @@ const Restaurant = () => {
       const resData = await checkJsonData(json);
 
       // update the state variable restaurants with Swiggy API data
-      console.log(resData);
+      // console.log(resData);
       setAllRestaurants(resData);
       setFilteredRestaurants(resData);
     } catch (error) {

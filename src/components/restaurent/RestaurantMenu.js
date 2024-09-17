@@ -15,7 +15,7 @@ const RestaurantMenu = () => {
   const { resId } = useParams(); // find resId from url using useParams hook
   const restaurant = useRestaurant(resId); // store the api data in restaurant
   const menuItems = useRestaurantMenu(resId);
-  const { cart } = useSelector((state) => state);
+  const cart = useSelector((state) => state.cart || []); // Fallback to empty array if cart is undefined
   const dispatch = useDispatch();
 
   // State to manage the selected item and modal visibility
@@ -134,7 +134,7 @@ const RestaurantMenu = () => {
                     />
                   )}
                   <div className="-mt-5">
-                    {cart.some((p) => p.id === item.id) ? (
+                    {cart?.some((p) => p.id === item.id) ? (
                       <button
                         onClick={(e) => {
                           e.stopPropagation(); // Prevents modal from opening

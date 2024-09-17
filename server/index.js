@@ -2,18 +2,55 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 const axios = require("axios");
-
+const database = require("./config/database");
+const cookieParser = require("cookie-parser");
+const { cloudinaryConnect } = require("./config/cloudinary");
+const fileUpload = require("express-fileupload");
+const dotenv = require("dotenv");
 const app = express();
+const userRoutes = require("./routes/user");
+const profileRoutes = require("./routes/profile");
+
 const PORT = process.env.PORT || 4000;
 
+// Loading environment variables from .env file
+dotenv.config();
+
+// Connecting to database
+database.connect();
+
+// Middlewares
 app.use(express.json());
-app.use( 
+app.use(cookieParser());
+app.use(
   cors({
     origin: "*" || "https://shubhanshu-foodcircles.vercel.app/",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-  }) 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
 );
+
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
+
+// Connecting to cloudinary
+cloudinaryConnect();
+
+// Setting up routes
+app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/profile", profileRoutes);
+
+// Testing the server
+app.get("/", (req, res) => {
+	return res.json({
+		success: true,
+		message: "Congrats, Your server is up and running ...",
+	});
+});
 
 // Endpoint to fetch Swiggy data
 app.get("/api/restaurants", async (req, res) => {
@@ -72,6 +109,7 @@ app.get("/api/menu", async (req, res) => {
 });
 
 
+// Listening to the server
 app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
+	console.log(`App is listening at ${PORT}`);
 });
