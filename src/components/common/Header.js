@@ -20,11 +20,12 @@ const Title = () => (
 
 // Header component for header section: Logo, Nav Items
 const Header = () => {
-  const { cart } = useSelector((state) => state);
+  const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.profile);
+  console.log("cart", cart)
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
     // useEffect(() => {
     //   const token = localStorage.getItem("token");
@@ -49,9 +50,9 @@ const Header = () => {
           </Link>
           <Link to="/cart">
             <p className="text-lg">🛒</p>
-            {cart.length > 0 && (
+            {cart?.length > 0 && (
               <span className="absolute top-4 md:top-7 ml-4 font-bold text-gray-800 text-xs bg-yellow-500 flex w-4 h-4 items-center justify-center animate-bounce rounded-full">
-                {cart.length}
+                {cart?.length}
               </span>
             )}
           </Link>
