@@ -43,7 +43,7 @@ const Header = () => {
   // Filter cart items for the logged-in user
   const userCartItems = cart?.filter((item) => item.userId === user?._id);
 
-  console.log("userCartItems", userCartItems);
+  // console.log("userCartItems", userCartItems);
 
   return (
     <div className="flex justify-between items-center py-2 border shadow-lg sticky top-0 bg-white z-10">

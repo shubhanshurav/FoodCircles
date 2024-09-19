@@ -30,7 +30,7 @@ const RestaurantMenu = () => {
 const handleAddToCart = (item) => {
     // console.log("Adding item to cart:", item);
   if (user) {
-    dispatch(addToCartThunk(user._id, item, 1)); // Send only item._id
+    dispatch(addToCartThunk(user._id, item.id, 1)); // Send only item._id
   } else {
     alert("Please log in to add items to your cart.");
   }

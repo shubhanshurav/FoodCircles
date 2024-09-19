@@ -6,7 +6,7 @@ import { cartEndpoints } from "../../services/apis";
 const {GET_CART_API, ADD_TO_CART_API, REMOVE_FROM_CART_API} = cartEndpoints;
 
 export function addToCartThunk(userId, menuItem, quantity) {
-console.log("menuItem1", menuItem);
+// console.log("menuItem1", menuItem);
 
   return async (dispatch) => {
     try {
@@ -16,7 +16,7 @@ console.log("menuItem1", menuItem);
         quantity,
       });
       
-// console.log("menuItem  ===",response)
+console.log("menuItem  ===",response)
 
       if (response.data.success) {
         dispatch(add({ userId, menuItem, quantity }));
