@@ -1,37 +1,51 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { MenuShimmer } from "../Shimmer";
-import { add, remove } from "../../redux/slices/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import useRestaurant from "../../hooks/useRestaurant";
 import useRestaurantMenu from "../../hooks/useRestaurantMenu";
 import MenuItemDetail from "../restaurent/MenuDetail"; // Import the modal component
+import {
+  addToCartThunk,
+  removeFromCartThunk,
+} from "../../redux/thunks/cartThunks";
 
 const IMG_CDN_URL = process.env.REACT_APP_IMG_CDN_URL;
 const ITEM_IMG_CDN_URL = process.env.REACT_APP_ITEM_IMG_CDN_URL;
 
 const RestaurantMenu = () => {
-  const { resId } = useParams(); // find resId from url using useParams hook
-  const restaurant = useRestaurant(resId); // store the api data in restaurant
+  const { resId } = useParams(); // find resId from URL using useParams hook
+  const restaurant = useRestaurant(resId); // store the API data in restaurant
   const menuItems = useRestaurantMenu(resId);
-  const cart = useSelector((state) => state.cart.cart || []); // Fallback to empty array if cart is undefined
+  const cart = useSelector((state) => state.cart?.cart || []); // Ensure fallback to empty array if cart is undefined
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.profile);
 
-  // console.log(menuItems)
+  // console.log(cart)
 
   // State to manage the selected item and modal visibility
   const [selectedItem, setSelectedItem] = useState(null);
 
-const addToCart = (item) => {
-  dispatch(add(item));
-  toast.success("Item added to Cart");
+const handleAddToCart = (item) => {
+    // console.log("Adding item to cart:", item);
+  if (user) {
+    dispatch(addToCartThunk(user._id, item, 1)); // Send only item._id
+  } else {
+    alert("Please log in to add items to your cart.");
+  }
 };
 
-const removeFromCart = (itemId) => {
-  dispatch(remove(itemId));
-  toast.error("Item removed from Cart");
-};
+
+  const handleRemoveFromCart = (itemId) => {
+    if (user) {
+      // console.log(user, itemId)
+      dispatch(removeFromCartThunk(user._id, itemId));
+      toast.error("Item removed from Cart");
+    } else {
+      alert("Please log in to remove items from your cart.");
+    }
+  };
 
   // Function to handle opening the modal
   const openModal = (item) => {
@@ -95,18 +109,18 @@ const removeFromCart = (itemId) => {
         <div className="py-4">
           <div className="py-2">
             <h3 className="font-extrabold text-gray-800 text-xl">
-              Recommended({menuItems.length})
+              Recommended ({menuItems.length})
             </h3>
           </div>
           <div className="border px-6 shadow-lg">
             <h3 className="text-[15px] font-bold text-yellow-500 pt-4">
               ⭐ Bestseller
             </h3>
-            {menuItems.map((item) => (
+            {menuItems?.map((item) => (
               <div
                 className="flex justify-between border-b border-gray-300 mb-6 items-center cursor-pointer"
                 key={item?.id}
-                onClick={() => openModal(item)} // Open modal when clicking on item
+                onClick={() => openModal(item)}
               >
                 <div className="w-[65%] md:w-[75%]">
                   <h3 className="text-md font-bold text-gray-800">
@@ -136,25 +150,25 @@ const removeFromCart = (itemId) => {
                     />
                   )}
                   <div className="-mt-5">
-                    {cart?.some((p) => p.id === item.id) ? (
+                    {cart?.some((p) => p?.menuItem?.id === item?.id) ? (
                       <button
-                        onClick={(e) => {
-                          e.stopPropagation(); // Prevents modal from opening
-                          removeFromCart(item?.id);
-                        }}
                         className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemoveFromCart(item.id);
+                        }}
                       >
                         Remove
                       </button>
                     ) : (
                       <button
+                        className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
                         onClick={(e) => {
                           e.stopPropagation(); // Prevents modal from opening
-                          addToCart(item);
+                          handleAddToCart(item);
                         }}
-                        className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
                       >
-                        ADD +
+                        Add +
                       </button>
                     )}
                   </div>

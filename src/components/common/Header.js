@@ -22,24 +22,28 @@ const Title = () => (
 const Header = () => {
   const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.profile);
-
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-useEffect(() => {
-  const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user");
-  // console.log(user);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
 
-  if (token) {
-    dispatch(setToken(JSON.parse(token))); // Restore the token to Redux
-  }
+    if (token) {
+      dispatch(setToken(JSON.parse(token))); // Restore the token to Redux
+    }
 
-  if (user) {
-    dispatch(setUser(JSON.parse(user))); // Restore the user to Redux
-  }
-}, [dispatch]);
+    if (storedUser) {
+      dispatch(setUser(JSON.parse(storedUser))); // Restore the user to Redux
+    }
+  }, [dispatch]);
 
+  // console.log("user", user)
+
+  // Filter cart items for the logged-in user
+  const userCartItems = cart?.filter((item) => item.userId === user?._id);
+
+  console.log("userCartItems", userCartItems);
 
   return (
     <div className="flex justify-between items-center py-2 border shadow-lg sticky top-0 bg-white z-10">
@@ -55,24 +59,18 @@ useEffect(() => {
           <Link to="/contact">
             <li>Contact</li>
           </Link>
-          <Link to="/cart">
-            <p className="text-lg">🛒</p>
-            {cart?.length > 0 && (
-              <span className="absolute top-4 md:top-7 ml-4 font-bold text-gray-800 text-xs bg-yellow-500 flex w-4 h-4 items-center justify-center animate-bounce rounded-full">
-                {cart?.length}
-              </span>
-            )}
-          </Link>
           <li className="flex items-center">
             {/* Conditionally render Login/Logout buttons */}
             {user ? (
               <>
-                {/* <button
-                  className="border text-white px-2 md:px-4 py-1 md:py-2 bg-gray-800 rounded-md"
-                  onClick={() => dispatch(logout(navigate))}
-                >
-                  Logout
-                </button> */}
+                <Link to="/cart">
+                  <p className="text-lg">🛒</p>
+                  {userCartItems?.length > 0 && (
+                    <span className="absolute top-4 md:top-7 ml-4 font-bold text-gray-800 text-xs bg-yellow-500 flex w-4 h-4 items-center justify-center animate-bounce rounded-full">
+                      {userCartItems?.length}
+                    </span>
+                  )}
+                </Link>
                 <ProfileDropdown />
               </>
             ) : (

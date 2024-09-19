@@ -1,30 +1,39 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { add, remove } from "../../redux/slices/CartSlice";
+// import { add, remove } from "../../redux/slices/CartSlice";
+import { addToCartThunk, removeFromCartThunk } from "../../redux/thunks/cartThunks";
 
 const MenuItemDetail = ({ item, onClose }) => {
-  const { cart } = useSelector((state) => state);
+  const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.profile);
 
-  const addToCart = (item) => {
-    dispatch(add(item));
-    toast.success("Item added to Cart");
-  };
+const handleAddToCart = (item) => {
+  if (user) {
+    dispatch(addToCartThunk(user._id, item, 1)); // Send only item._id
+  } else {
+    alert("Please log in to add items to your cart.");
+  }
+};
 
-  const removeFromCart = (itemId) => {
-    dispatch(remove(itemId));
+const handleRemoveFromCart = (itemId) => {
+  if (user) {
+    // console.log(user, itemId)
+    dispatch(removeFromCartThunk(user._id, itemId));
     toast.error("Item removed from Cart");
-  };
-
+  } else {
+    alert("Please log in to remove items from your cart.");
+  }
+};
   if (!item) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 flex justify-center items-center z-50">
       <div className="bg-white w-4/5 md:w-1/3 p-4 rounded shadow-lg">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-600 font-bold text-lg"
+          className="absolute top-20 md:top-8 right-10 md:right-[35%] text-gray-700 font-bold text-lg"
         >
           ✖
         </button>
@@ -54,25 +63,25 @@ const MenuItemDetail = ({ item, onClose }) => {
         </p>
         <div className="text-center flex gap-4 pt-4 m-auto w-fit">
           <div className="">
-            {cart.some((p) => p.id === item.id) ? (
+            {cart?.some((p) => p.menuItem.id === item.id) ? (
               <button
+                className="border border-green-700 text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevents modal from opening
-                  removeFromCart(item?.id);
+                  handleRemoveFromCart(item.id);
                 }}
-                className="border border-green-700 text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
               >
                 Remove
               </button>
             ) : (
               <button
+                className="border border-green-700 text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevents modal from opening
-                  addToCart(item);
+                  handleAddToCart(item);
                 }}
-                className="border border-green-700 text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
               >
-                ADD +
+                Add +
               </button>
             )}
           </div>

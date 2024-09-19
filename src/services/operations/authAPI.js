@@ -178,7 +178,7 @@ export function logout(navigate) {
     // Clear Redux and localStorage
     dispatch(setToken(null));
     dispatch(setUser(null));
-    dispatch(resetCart());
+    // dispatch(resetCart());
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 

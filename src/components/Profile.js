@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 import {
   deleteProfile,
   updateDisplayPicture,
   updateProfile,
 } from "../services/operations/SettingsAPI";
-import { setLoading, setUser } from "../redux/slices/profileSlice";
 import { getUserDetails } from "../services/operations/profileAPI"; 
-import { logout } from "../services/operations/authAPI";
-import { apiConnector } from "../services/apiConnector";
 import { useNavigate } from "react-router-dom";
+// import { setLoading, setUser } from "../redux/slices/profileSlice";
+// import { logout } from "../services/operations/authAPI";
+// import { apiConnector } from "../services/apiConnector";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   const { token } = useSelector((state) => state.auth); // Assuming token is stored in auth slice
-  console.log(token)
+  // console.log(token)
 
   useEffect(() => {
     if (token) {

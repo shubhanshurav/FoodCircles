@@ -1,5 +1,5 @@
+// redux/slices/cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-hot-toast";
 
 const initialState = {
   cart: localStorage.getItem("cart")
@@ -16,79 +16,69 @@ const initialState = {
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  // initialState:[],
   reducers: {
+    setCart: (state, action) => {
+      state.cart = action.payload;
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+    },
     add: (state, action) => {
-      const restaurant = action.payload;
-      const index = state.cart.findIndex((item) => item._id === restaurant);
+      const { userId, menuItem, quantity } = action.payload;
+      console.log(menuItem)
 
-      if (index >= 0) {
-        // If the restaurant is already in the cart, do not modify the quantity
-        toast.error("restaurant already in cart");
-        return;
+      // Compare based on whether menuItem is an object or an ID
+      const existingItem = state.cart.find(
+        (item) => item.menuItem.id === menuItem.id
+      );
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        state.cart.push({userId, menuItem, quantity });
       }
-      // If the restaurant is not in the cart, add it to the cart
-      state.cart.push(restaurant);
-      // Update the total quantity and price
-      state.totalItems++;
-      state.total += restaurant.price;
-      // Update to localstorage
+
+      state.total += quantity * action.payload.price; // Adjust based on your logic
+      state.totalItems += quantity;
+
+      // Sync with local storage
       localStorage.setItem("cart", JSON.stringify(state.cart));
       localStorage.setItem("total", JSON.stringify(state.total));
       localStorage.setItem("totalItems", JSON.stringify(state.totalItems));
-      // show toast
-      toast.success("restaurant added to cart");
     },
     remove: (state, action) => {
-      const restaurantId = action.payload;
-      const index = state.cart.findIndex((item) => item._id !== restaurantId);
-      // console.log(restaurantId,  index)
+      const { menuItem } = action.payload;
+      // console.log("menuItemId",menuItem)
 
-      if (index >= 0) {
-        // If the restaurant is found in the cart, remove it
-        state.totalItems--;
-        state.total -= state.cart[index].price;
-        state.cart.splice(index, 1);
-        // Update to localstorage
+      const itemToRemove = state.cart.find(
+        (item) => item.menuItem.id === menuItem // Compare IDs properly
+      );
+
+      if (itemToRemove) {
+        state.cart = state.cart.filter(
+          (item) => item.menuItem.id !== menuItem
+        );
+
+        state.total -= itemToRemove.quantity * action.payload.price;
+        state.totalItems -= itemToRemove.quantity;
+
+        // Sync with local storage
         localStorage.setItem("cart", JSON.stringify(state.cart));
         localStorage.setItem("total", JSON.stringify(state.total));
         localStorage.setItem("totalItems", JSON.stringify(state.totalItems));
-        // show toast
-        toast.success("restaurant removed from cart");
       }
     },
     resetCart: (state) => {
       state.cart = [];
       state.total = 0;
       state.totalItems = 0;
-      // Update to localstorage
-      localStorage.removeItem("cart");
-      localStorage.removeItem("total");
-      localStorage.removeItem("totalItems");
+
+      // Sync with local storage
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+      localStorage.setItem("total", JSON.stringify(state.total));
+      localStorage.setItem("totalItems", JSON.stringify(state.totalItems));
     },
   },
 });
 
-export const { add, remove, resetCart } = cartSlice.actions;
 
+export const { setCart, add, remove, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;
-
-
-// import { createSlice } from "@reduxjs/toolkit";
-
-// export const CartSlice = createSlice({
-//   name: "cart",
-//   initialState: [],
-//   reducers: {
-//     add: (state, action) => {
-//       state.push(action.payload);
-//     },
-//     remove: (state, action) => {
-//       return state.filter((item) => item.id !== action.payload);
-//     },
-//     clearCart: (state) => {},
-//   },
-// });
-
-// export const { add, remove } = CartSlice.actions;
-// export default CartSlice.reducer;

@@ -1,19 +1,25 @@
 import React from "react";
-import { remove } from "../../redux/slices/CartSlice";
-import { useDispatch } from "react-redux";
+// import { remove } from "../../redux/slices/CartSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { removeFromCartThunk } from "../../redux/thunks/cartThunks";
 
 const ITEM_IMG_CDN_URL = process.env.REACT_APP_ITEM_IMG_CDN_URL;
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
-
-  console.log(item)
+  const { user } = useSelector((state) => state.profile);
+  // console.log("item",item)
 
   // Function to handle removal of an item from the cart
-  const removeFromCart = (itemId) => {
-    dispatch(remove(itemId));
-    toast.error("Item removed from Cart");
+  const handleRemoveFromCart = (itemId) => {
+    if (user) {
+      // console.log(user, itemId)
+      dispatch(removeFromCartThunk(user._id, itemId));
+      toast.error("Item removed from Cart");
+    } else {
+      alert("Please log in to remove items from your cart.");
+    }
   };
 
   return (
@@ -47,8 +53,11 @@ const CartItem = ({ item }) => {
           )}
           <div className="-mt-5">
             <button
-              onClick={() => removeFromCart(item?.id)}
-              className="border text-red-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white hover:bg-red-100"
+              className="border text-green-700 shadow-lg rounded-md font-semibold text-[15px] px-4 py-2 bg-white"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRemoveFromCart(item.id);
+              }}
             >
               Remove
             </button>
