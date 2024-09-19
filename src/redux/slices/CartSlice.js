@@ -45,16 +45,16 @@ const cartSlice = createSlice({
       localStorage.setItem("totalItems", JSON.stringify(state.totalItems));
     },
     remove: (state, action) => {
-      const { menuItem } = action.payload;
+      const { menuItemId } = action.payload;
       // console.log("menuItemId",menuItem)
 
       const itemToRemove = state.cart.find(
-        (item) => item.menuItem.id === menuItem // Compare IDs properly
+        (item) => item.menuItem.id === menuItemId // Compare IDs properly
       );
 
       if (itemToRemove) {
         state.cart = state.cart.filter(
-          (item) => item.menuItem.id !== menuItem
+          (item) => item.menuItem.id !== menuItemId
         );
 
         state.total -= itemToRemove.quantity * action.payload.price;

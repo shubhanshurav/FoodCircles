@@ -30,3 +30,9 @@ export const settingsEndpoints = {
   CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
   DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
 }
+
+export const cartEndpoints = {
+  GET_CART_API: BASE_URL + "/cart",
+  ADD_TO_CART_API: BASE_URL + "/cart/add",
+  REMOVE_FROM_CART_API: BASE_URL + "/cart/remove",
+}

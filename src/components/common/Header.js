@@ -62,7 +62,7 @@ const Header = () => {
           <li className="flex items-center">
             {/* Conditionally render Login/Logout buttons */}
             {user ? (
-              <>
+              <div className="gap-2 flex flex-row">
                 <Link to="/cart">
                   <p className="text-lg">🛒</p>
                   {userCartItems?.length > 0 && (
@@ -72,7 +72,7 @@ const Header = () => {
                   )}
                 </Link>
                 <ProfileDropdown />
-              </>
+              </div>
             ) : (
               <button
                 className="border text-white px-2 md:px-4 py-1 md:py-2 bg-gray-800 rounded-md"

@@ -52,11 +52,11 @@ router.post("/remove", async (req, res) => {
 
     // Remove the item by comparing the menuItemId with item.menuItem.id
     cart.items = cart.items.filter(
-      (item) => item.menuItem && item.menuItem.id !== menuItemId
+      (item) => String(item.menuItem) !== String(menuItemId)
     );
+    console.log("Cart after removal:", cart.items.length);
 
-    console.log("Cart after removal:", cart.items);
-
+    
     await cart.save();
     res.status(200).json({ success: true, cart });
   } catch (error) {

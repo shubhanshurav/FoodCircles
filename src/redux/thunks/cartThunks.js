@@ -1,15 +1,16 @@
 // redux/thunks/cartThunks.js
 import { apiConnector } from "../../services/apiConnector";
 import { add, remove, setCart } from "../../redux/slices/CartSlice";
+import { cartEndpoints } from "../../services/apis";
 
-const API_BASE_URL = "http://localhost:5000/api/v1/cart";
+const {GET_CART_API, ADD_TO_CART_API, REMOVE_FROM_CART_API} = cartEndpoints;
 
 export function addToCartThunk(userId, menuItem, quantity) {
 console.log("menuItem1", menuItem);
 
   return async (dispatch) => {
     try {
-      const response = await apiConnector("POST", `${API_BASE_URL}/add`, {
+      const response = await apiConnector("POST", ADD_TO_CART_API, {
         userId,
         menuItem,
         quantity,
@@ -26,16 +27,16 @@ console.log("menuItem1", menuItem);
   };
 }
 
-export function removeFromCartThunk(userId, menuItem) {
+export function removeFromCartThunk(userId, menuItemId) {
   return async (dispatch) => {
     try {
-      const response = await apiConnector("POST", `${API_BASE_URL}/remove`, {
+      const response = await apiConnector("POST", REMOVE_FROM_CART_API, {
         userId,
-        menuItem,
+        menuItemId,
       });
 
       if (response.data.success) {
-        dispatch(remove({ menuItem }));
+        dispatch(remove({ menuItemId }));
       }
     } catch (error) {
       console.error("Failed to remove from cart:", error);
@@ -46,7 +47,7 @@ export function removeFromCartThunk(userId, menuItem) {
 export function fetchCartThunk(userId) {
   return async (dispatch) => {
     try {
-      const response = await apiConnector("GET", `${API_BASE_URL}/${userId}`);
+      const response = await apiConnector("GET", `${GET_CART_API}/${userId}`);
 
       if (response.data.success) {
         dispatch(setCart(response.data.cart));

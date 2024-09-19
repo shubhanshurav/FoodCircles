@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast";
 import { setLoading, setToken } from "../../redux/slices/authSlice";
-import { resetCart } from "../../redux/slices/CartSlice";
+// import { resetCart } from "../../redux/slices/CartSlice";
 import { setUser } from "../../redux/slices/profileSlice";
 import { apiConnector } from "../apiConnector";
 import { endpoints } from "../apis";
