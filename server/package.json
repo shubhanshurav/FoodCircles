@@ -1,5 +1,5 @@
 {
-  "name": "workflow-server",
+  "name": "foodCircle-server",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -7,7 +7,7 @@
     "dev": "nodemon index.js"
   },
   "keywords": [
-    "workflow-backend"
+    "foodCircle-backend"
   ],
   "author": "Shubhanshu rao",
   "license": "ISC",

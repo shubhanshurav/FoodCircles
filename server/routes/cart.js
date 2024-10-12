@@ -20,9 +20,9 @@ router.post("/add", async (req, res) => {
     );
 
     if (existingItem) {
-      existingItem.quantity += quantity; // Increment quantity if item exists
+      existingItem.quantity += quantity; 
     } else {
-      cart.items.push({ userId, menuItem, quantity }); // Add new item
+      cart.items.push({ userId, menuItem, quantity }); 
     }
 
     await cart.save();

@@ -49,7 +49,7 @@ const cartSlice = createSlice({
       // console.log("menuItemId",menuItem)
 
       const itemToRemove = state.cart.find(
-        (item) => item.menuItem.id === menuItemId // Compare IDs properly
+        (item) => item.menuItem.id === menuItemId 
       );
 
       if (itemToRemove) {

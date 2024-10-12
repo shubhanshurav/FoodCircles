@@ -90,6 +90,8 @@ export function login(email, password, navigate) {
         password,
       });
 
+      console.log(response.data);
+
       if (!response.data.success) {
         throw new Error(response.data.message || "Login failed");
       }
