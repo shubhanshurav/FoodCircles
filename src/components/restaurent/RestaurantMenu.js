@@ -27,15 +27,14 @@ const RestaurantMenu = () => {
   // State to manage the selected item and modal visibility
   const [selectedItem, setSelectedItem] = useState(null);
 
-const handleAddToCart = (item) => {
+  const handleAddToCart = (item) => {
     // console.log("Adding item to cart:", item);
-  if (user) {
-    dispatch(addToCartThunk(user._id, item.id, 1)); // Send only item._id
-  } else {
-    alert("Please log in to add items to your cart.");
-  }
-};
-
+    if (user) {
+      dispatch(addToCartThunk(user._id, item.id, 1)); // Send only item._id
+    } else {
+      alert("Please log in to add items to your cart.");
+    }
+  };
 
   const handleRemoveFromCart = (itemId) => {
     if (user) {
@@ -117,29 +116,31 @@ const handleAddToCart = (item) => {
               ⭐ Bestseller
             </h3>
             {menuItems?.map((item) => (
-              <div
-                className="flex justify-between border-b border-gray-300 mb-6 items-center cursor-pointer"
-                key={item?.id}
-                onClick={() => openModal(item)}
-              >
-                <div className="w-[65%] md:w-[75%]">
-                  <h3 className="text-md font-bold text-gray-800">
-                    {item?.name}
-                  </h3>
-                  <p className="text-[15px] font-semibold text-gray-600">
-                    {item?.price > 0
-                      ? new Intl.NumberFormat("en-IN", {
-                          style: "currency",
-                          currency: "INR",
-                        }).format(item?.price / 100)
-                      : " "}
-                    <span className="text-orange-500 font-light text-[10px] bg-orange-200 m-1">
-                      | 50% OFF | USE TRYNEW
-                    </span>
-                  </p>
-                  <p className="py-3 text-gray-400 text-sm">
-                    {item?.description}
-                  </p>
+              <>
+                <div
+                  className="flex justify-between border-b border-gray-300 mb-6 items-center cursor-pointer"
+                  key={item?.id}
+                  onClick={() => openModal(item)}
+                >
+                  <div className="w-[65%] md:w-[75%]">
+                    <h3 className="text-md font-bold text-gray-800">
+                      {item?.name}
+                    </h3>
+                    <p className="text-[15px] font-semibold text-gray-600">
+                      {item?.price > 0
+                        ? new Intl.NumberFormat("en-IN", {
+                            style: "currency",
+                            currency: "INR",
+                          }).format(item?.price / 100)
+                        : " "}
+                      <span className="text-orange-500 font-light text-[10px] bg-orange-200 m-1">
+                        | 50% OFF | USE TRYNEW
+                      </span>
+                    </p>
+                    <p className="py-3 text-gray-400 text-sm">
+                      {item?.description}
+                    </p>
+                  </div>
                 </div>
                 <div className="m-auto text-center py-4 px-2">
                   {item?.imageId && (
@@ -173,7 +174,7 @@ const handleAddToCart = (item) => {
                     )}
                   </div>
                 </div>
-              </div>
+              </>
             ))}
           </div>
         </div>

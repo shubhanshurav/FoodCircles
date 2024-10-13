@@ -18,6 +18,7 @@ function LoginForm() {
   const { email, password } = formData;
 
   const handleOnChange = (e) => {
+    e.preventDefault();
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
@@ -26,6 +27,7 @@ function LoginForm() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    console.log(email, password)
     dispatch(login(email, password, navigate));
   };
 
