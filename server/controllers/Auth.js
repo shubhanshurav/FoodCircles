@@ -116,7 +116,8 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     // Get email and password from request body
-    const { email, password } = req.body
+    const { email, password } = req.body;
+    // console.log(email,password);
 
     // Check if email or password is missing
     if (!email || !password) {
@@ -124,13 +125,15 @@ exports.login = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: `Please Fill up All the Required Fields`,
-      })
+      });
     }
 
-    // Find user with provided email
-    const user = await User.findOne({ email }).populate("additionalDetails")
+    console.log(email,password)
 
-    // console.log(user)
+    // Find user with provided email
+    const user = await User.findOne({ email }).populate("additionalDetails");
+
+    console.log(user);
 
     // If user not found with provided email
     if (!user) {
@@ -138,7 +141,7 @@ exports.login = async (req, res) => {
       return res.status(401).json({
         success: false,
         message: `User is not Registered with Us Please SignUp to Continue`,
-      })
+      });
     }
 
     // Generate JWT token and Compare Password
@@ -149,27 +152,27 @@ exports.login = async (req, res) => {
         {
           expiresIn: "24h",
         }
-      )
+      );
 
       // Save token to user document in database
-      user.token = token
-      user.password = undefined
+      user.token = token;
+      user.password = undefined;
       // Set cookie for token and return success response
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
-      }
+      };
       res.cookie("token", token, options).status(200).json({
         success: true,
         token,
         user,
         message: `User Login Success`,
-      })
+      });
     } else {
       return res.status(401).json({
         success: false,
         message: `Password is incorrect`,
-      })
+      });
     }
   } catch (error) {
     console.error(error)
