@@ -117,12 +117,12 @@ const handleAddToCart = (item) => {
               ⭐ Bestseller
             </h3>
             {menuItems?.map((item) => (
-              <div className="flex justify-between border-b border-gray-300 mb-6 items-center cursor-pointer">
-                <div
-                  className="w-[65%] md:w-[75%]"
-                  key={item?.id}
-                  onClick={() => openModal(item)}
-                >
+              <div
+                className="flex justify-between border-b border-gray-300 mb-6 items-center cursor-pointer"
+                key={item?.id}
+                onClick={() => openModal(item)}
+              >
+                <div className="w-[65%] md:w-[75%]">
                   <h3 className="text-md font-bold text-gray-800">
                     {item?.name}
                   </h3>
